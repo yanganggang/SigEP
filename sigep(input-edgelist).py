@@ -133,6 +133,8 @@ def process(filename):
 
     N = len(v_dict)  # vertices
     print(N)
+    
+    print(getlog(N*(N-1)/2))
 
     p_list = getpvalue(cc_dict, v_dict, M, N)
     print("--------pvalue--------")
@@ -156,12 +158,18 @@ def process(filename):
         adjust_p.append(adjust)
     print(adjust_p)
     line = 0
+    maxindex = 0
     for k,v in node_p_sorted:
         line += 1
         if v < adjust_p[line-1]:
             # output is line number, protein name, pvalue and adjusted pvalue
-            print(str(line) + " " + str(k) + " : " + str(v) + " : " + str(adjust_p[line-1]) + "\n")
-
+            maxindex = line
+    print(maxindex)
+    
+    line = 0
+    for k,v in node_p_sorted:
+        line += 1
+        print(str(line) + " " + str(k) + " : " + str(v) + "\n")
 
 if __name__ == "__main__":
     filename = "original Gavin.txt"  #file name of PPI netwrok dataset
